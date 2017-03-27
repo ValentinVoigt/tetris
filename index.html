@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<script src="js/jquery-1.10.2.min.js" type="text/javascript"></script>
+		<script src="js/tetris.js" type="text/javascript"></script>
+		<script src="js/tetris_renderer.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" /> 
+		<link rel="stylesheet" type="text/css" href="css/tetris.css" /> 
+		<title>Tetris</title>
+	</head>
+	<body>
+		<div class="container">
+			<h1>
+				Tetris
+				<span id="gameover" class="label label-danger" style="display:none;">Game over</span>
+			</h1>
+			<div id="game"></div>
+			<div id="right">
+				<div id="score">
+					<p>
+						<strong>Score: <span></span></strong>
+					</p>
+				</div>
+				<div>
+					<p>
+						<strong>Next block:</strong>
+					</p>
+					<div id="preview"></div>
+				</div>
+			</div>
+			<hr>
+			<i>&copy; Valentin Voigt (2013)</i>
+		</div>
+		<script type="text/javascript">
+			var game = new Game(18, 10);
+			var renderer = new Game_Renderer(game);
+			function tick() { game.tick(); renderer.render(); window.setTimeout(tick, game.tick_wait); }
+			tick();
+		</script>
+	</body>
+</html>
