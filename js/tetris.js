@@ -10,6 +10,22 @@ var KEY_RIGHT = 39;
 var KEY_DOWN = 40;
 
 /**
+ * Shuffles array in place.
+ * @param {Array} a items The array containing the items.
+ * Source: https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+ */
+
+function shuffle(a) {
+	var j, x, i;
+	for (i = a.length; i; i--) {
+		j = Math.floor(Math.random() * i);
+		x = a[i - 1];
+		a[i - 1] = a[j];
+		a[j] = x;
+	}
+}
+
+/**
  * The Game class
  */
 
@@ -35,14 +51,32 @@ function Game(height, width)
 
 function Game_Obj()
 {
+
 	this.y = 0;
 	this.x = 0;
-	this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
-
-	this.data = this.objects[Math.floor(Math.random()*this.objects.length)];
+	this.set_random_color();
+	this.set_random_data();
 	this.height = this.data.length;
 	this.width = this.data[0].length;
 };
+
+Game_Obj.queue = [];
+
+Game_Obj.prototype.set_random_color = function() {
+	this.color = this.colors[Math.floor(Math.random()*this.colors.length)];
+}
+
+Game_Obj.prototype.set_random_data = function() {
+	// Once the queue is empty,
+	// we generate a queue of which object will be generated next.
+	if (Game_Obj.queue.length == 0) {
+		for (var i = 0; i < this.objects.length; i++)
+			Game_Obj.queue.push(i);
+		shuffle(Game_Obj.queue);
+	}
+
+	this.data = this.objects[Game_Obj.queue.pop()];
+}
 
 Game_Obj.prototype.colors = [
     'rgba(171, 225, 136, 1)',
@@ -236,15 +270,14 @@ Game.prototype.generate_field = function(height, width)
  
 Game.prototype.generate_new_object = function() 
 {
-	if (typeof this.next_obj == 'undefined') {
-		this.obj = new Game_Obj();
-		this.obj.x = Math.floor(this.width / 2 - this.obj.width / 2);
-	} else {
-		this.obj = this.next_obj;
+	if (!this.next_obj) {
+		this.next_obj = new Game_Obj();
+		this.next_obj.x = Math.floor(this.width / 2 - this.next_obj.width / 2);
 	}
 
+	this.obj = this.next_obj;
 	this.next_obj = new Game_Obj();
-	this.next_obj.x = Math.floor(this.width / 2 - this.obj.width / 2);
+	this.next_obj.x = Math.floor(this.width / 2 - this.next_obj.width / 2);
 }
 
 /**
