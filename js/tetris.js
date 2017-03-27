@@ -154,6 +154,7 @@ Game.prototype.on_key_down = function(e)
 			do { 
 				game.tick();
 			} while (game.obj_can_move_down() == ST_CAN_MOVE);
+			game.tick(); // generate next object immediately
 			break;
 		case KEY_UP:
 			if (game.obj_can_rotate())
