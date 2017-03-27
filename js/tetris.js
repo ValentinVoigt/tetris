@@ -238,6 +238,7 @@ Game.prototype.generate_new_object = function()
 {
 	if (typeof this.next_obj == 'undefined') {
 		this.obj = new Game_Obj();
+		this.obj.x = Math.floor(this.width / 2 - this.obj.width / 2);
 	} else {
 		this.obj = this.next_obj;
 	}
