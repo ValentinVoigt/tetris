@@ -45,9 +45,14 @@ function Game_Obj()
 };
 
 Game_Obj.prototype.colors = [
-	'red', 'green', 'yellow',
-	'blue', 'orange', 'grey',
-	'brown', 'cyan', 'magenta',
+    'rgba(171, 225, 136, 1)',
+    'rgba(247, 239, 153, 1)',
+    'rgba(241, 187, 135, 1)',
+    'rgba(247, 142, 105, 1)',
+    'rgba(125, 164, 99, 1)',
+    'rgba(180, 174, 112, 1)',
+    'rgba(176, 137, 99, 1)',
+    'rgba(180, 104, 77, 1)'
 ];
 
 Game_Obj.prototype.objects = [

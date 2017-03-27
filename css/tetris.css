@@ -1,3 +1,7 @@
+body {
+	background:#CFCBCE;
+}
+
 div#game {
 	border:1px solid black;
 	width:400px;
@@ -5,7 +9,7 @@ div#game {
 	position:relative;
 	float:left;
 	margin:10px 10px 10px 0;
-	background:#eee;
+	background:#90868D;
 }
 div#right{
 	margin:10px 0 10px 10px;
@@ -27,4 +31,5 @@ div.block.active {
 }
 hr {
 	clear:left;
+	background:black;
 }
